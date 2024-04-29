@@ -59,6 +59,26 @@ module.exports = {
       .setThumbnail(botUser.avatarURL({ dynamic: true, format: 'png', size: 1024 }))
       .setImage(`https://media.discordapp.net/attachments/853597337057099776/1234428372667600896/kiberpank-74-foto-62.png?ex=6630b282&is=662f6102&hm=4e2933c8f154fd341e71979e7ac67251e4a574297d19d913a845e2be82dc81ea&=&format=webp&quality=lossless&width=550&height=325`);
 
+    
+    const button1 = new ButtonBuilder()
+      .setLabel('YouTube')
+      .setURL('')
+      .setStyle(ButtonStyle.Link);
+
+    const button2 = new ButtonBuilder()
+      .setLabel('Discord')
+      .setURL('')
+      .setStyle(ButtonStyle.Link);
+
+    const button3 = new ButtonBuilder()
+      .setLabel('Code')
+      .setURL('')
+      .setStyle(ButtonStyle.Link);
+      
+    const row = new ActionRowBuilder()
+      .addComponents(button1, button2, button3);
+    
+
  
     
     message.reply({ embeds: [embed], components: [row] });
