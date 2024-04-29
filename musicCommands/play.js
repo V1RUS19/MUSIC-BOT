@@ -320,41 +320,41 @@ module.exports = {
     })
         .setDescription(`**Ваша песня поставлена в очередь и готова к воспроизведению!**`)
         .setColor('#14bdff')
-        .setFooter({ текст: 'Использовать? очередь для получения дополнительной информации' });
-      возвращаться сообщение.Отвечать({ встраивает: [вставлять] });
+        .setFooter({ text: 'Используйте ? очередь для получения дополнительной информации' });
+      return message.reply({ embeds: [embed] });
     }
 
-    константа listener = асинхронный (старое состояние, новое состояние) => {
-      ЕСЛИ (новое состояние.член.Пользователь.Бот) {
-        возвращаться;
+    const listener = async (oldState, newState) => {
+      if (newState.member.user.bot) {
+        return;
       }
 
-      ЕСЛИ (Олдстейт.Канал && !новое состояние.Канал) {
-        константа membersInChannel = Олдстейт.Канал.Члены.Размер;
-        ЕСЛИ (участникиInChannel === 1) {
-          сообщение.Клиент.удалить прослушиватель('voiceStateUpdate', слушатель);
+      if (oldState.channel && !newState.channel) {
+        const membersInChannel = oldState.channel.members.size;
+        if (membersInChannel === 1) {
+          message.client.removeListener('voiceStateUpdate', listener);
 
-          ЕСЛИ (!связь.уничтожение) {
-            связь.разрушать();
+          if (!connection.destroyed) {
+            connection.destroy();
           }
         }
       }
     };
 
-    сообщение.Клиент.на('voiceStateUpdate', слушатель);
+    message.client.on('voiceStateUpdate', listener);
 
-    Ждите Играть песня(соединение, searchQuery, сообщение);
+    await playSong(connection, searchQuery, message);
   },
-  очередь,
-  снимать с очереди,
+  queue,
+  dequeue,
   playNextSong,
   playSong,
   pause: () => {
-    паузаВоспроизведение();
+    pausePlayback();
   },
   resume: () => {
-    резюмеВоспроизведение();
+    resumePlayback();
   },
-  getPlayer: () => игрок,
-  getCurrentConnection: () => текущее соединение, 
+  getPlayer: () => player,
+  getCurrentConnection: () => currentConnection, 
 };
