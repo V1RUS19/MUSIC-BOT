@@ -4,7 +4,7 @@ const { queue } = require('./play');
 
 module.exports = {
   name: 'queue',
-  description: 'Show the songs in the queue.',
+  description: 'Показать очередь песень.',
   execute(message) {
     if (queue.length === 0) {
       const embed = new EmbedBuilder()
