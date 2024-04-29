@@ -4,7 +4,7 @@ const db = require("../mongodb");
 module.exports = {
   name: 'help',
   aliases: ['hlp', 'h'],
-  description: 'Shows a list of available commands',
+  description: 'Показывает список доступных команд',
   execute(message, args) {
     const botUser = message.client.user;
     const botPing = Date.now() - message.createdTimestamp;
@@ -17,7 +17,7 @@ module.exports = {
         url: 'https://discord.gg/FUEHs7RCqz'
     })
      
-      .setDescription(`__**STATS :**__\n\n> **📊 Bot in servers:** ${serverCount}\n> **🟢 Bot Ping:** ${botPing}ms\n> **👑 Made By [GlaceYT](https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A)**\n\n__**COMMANDS :**__ `)
+      .setDescription(`__**STATS :**__\n\n> **📊 Бот на серверах:** ${serverCount}\n> **🟢 Bot Ping:** ${botPing}ms\n> **👑 Made By [GlaceYT](https://www.youtube.com/channel/UCPbAvYWBgnYhliJa1BIrv0A)**\n\n__**COMMANDS :**__ `)
       .addFields(
         // Basic commands category
         {
