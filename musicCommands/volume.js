@@ -1,37 +1,37 @@
 
-const { EmbedBuilder } = require('discord.js');
-const { getPlayer } = require('./play');
+константа { EmbedBuilder } = Требоват('дискорд.js');
+константа { getPlayer } = Требоват('./играть');
 
-module.exports = {
-  name: 'volume',
-  description: 'Adjust the volume of the bot',
-  execute: async (message, args) => {
-    const volume = parseFloat(args[0]);
+модуль.экспорт = {
+  Имя: 'объем',
+  Описание: 'Регулируйте громкость бота',
+  выполнять: асинхронный (сообщение, аргументы) => {
+    константа volume = анализироватьFloat(аргументы[0]);
 
-    if (isNaN(volume) || volume < 0 || volume > 100) {
-      return message.reply('❌ Please provide a valid volume level between 0 and 100.');
+    ЕСЛИ (isNaN(объем) || объем < 0 || объем > 100) {
+      возвращаться сообщение.Отвечать('❌ Укажите допустимый уровень громкости от 0 до 100.');
     }
-    const player = getPlayer();
+    константа player = getPlayer();
 
-    if (!player) {
-      return message.reply('❌ No music is currently playing.');
+    ЕСЛИ (!игрок) {
+      возвращаться сообщение.Отвечать('❌ В настоящее время музыка не воспроизводится.');
     }
-    const resource = player.state.resource;
+    константа resource = игрок.состояние.ресурс;
 
-    if (!resource) {
-      return message.reply('❌ No audio resource found.');
+    ЕСЛИ (!ресурс) {
+      возвращаться сообщение.Отвечать('❌ Аудиоресурс не найден.');
     }
-    resource.volume.setVolume(volume / 100);
+    ресурс.объем.setVolume(объем / 100);
 
-    const embed = new EmbedBuilder()
+    константа embed = новый EmbedBuilder()
       .setColor('#2b71ec')
      .setAuthor({
-          name: 'Volume Control!',
-          iconURL: 'https://cdn.discordapp.com/attachments/1175488636033175602/1175488721546645624/volume.png?ex=656b6a2e&is=6558f52e&hm=8215d2f88ab073db1f3b6438c28fd73315ad7e581bb54000dbb06fca387cecf7&',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          Имя: 'Контроль громкости!',
+          значокURL: 'https://cdn.discordapp.com/attachments/1175488636033175602/1175488721546645624/volume.png?ex=656b6a2e&amp;is=6558f52e&amp;hm=8215d2f88ab073db1f3b6438c28fd73315ad7e 581bb54000dbb06fca387cecf7&',
+          URL: 'https://discord.gg/FUEHs7RCqz'
         })
-      .setDescription(`**volume engaged to ${volume}%**`);
+      .setDescription(`**объем занят ${объем}%**`);
 
-    message.reply({ embeds: [embed] });
+    сообщение.Отвечать({ встраивает: [вставлять] });
   },
 };
