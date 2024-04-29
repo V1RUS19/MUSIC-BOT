@@ -1,14 +1,14 @@
 const { getHistory } = require('./historyUtils');
 const { EmbedBuilder } = require('discord.js');
 const db = require("../mongodb");
-module.exports = {
+module.exports = {  
   name: 'history',
-  description: 'Show the history of played songs',
+  description: 'Показывает историю воиспроизведенных песен',
   execute(message) {
     const history = getHistory();
 
     if (history.length === 0) {
-      return message.reply('The song history is empty.');
+      return message.reply('История песен пуста.');
     }
 
     const embed = new EmbedBuilder()
