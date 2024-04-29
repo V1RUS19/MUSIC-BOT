@@ -1,15 +1,15 @@
-const { VoiceConnectionStatus } = require('@discordjs/voice');
-const playModule = require('./play.js');
+константа { VoiceConnectionStatus } = Требоват('@дискордджс/голос');
+константа playModule = Требоват('./play.js');
 
-module.exports = {
-  name: 'pause',
-  description: 'Pause the music playback',
-  execute: (message, args) => {
-    const currentConnection = playModule.getCurrentConnection();
-    if (currentConnection && currentConnection.state.status === VoiceConnectionStatus.Ready) {
-      playModule.pause();
-    } else {
-      message.reply('❌ The bot is not currently playing any music.');
+модуль.экспорт = {
+  Имя: 'Пауза',
+  Описание: 'Приостановить воспроизведение музыки',
+  выполнять: (сообщение, аргументы) => {
+    константа currentConnection = playModule.getCurrentConnection();
+    ЕСЛИ (текущее соединение &amp;&amp; текущее соединение.состояние.Положение дела === VoiceConnectionStatus.Готовый) {
+      playModule.Пауза();
+    } еще {
+      сообщение.Отвечать('❌ Бот в настоящее время не воспроизводит музыку.');
     }
   },
 };
