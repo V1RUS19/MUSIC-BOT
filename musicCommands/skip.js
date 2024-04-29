@@ -1,42 +1,42 @@
-const { joinVoiceChannel, VoiceConnectionStatus } = require('@discordjs/voice');
-const { EmbedBuilder } = require('discord.js');
-const { dequeue, playNextSong, playSong } = require('./play');
-const { queue } = require('./play');
+константа { joinVoiceChannel, VoiceConnectionStatus } = Требоват('@дискордджс/голос');
+константа { EmbedBuilder } = Требоват('дискорд.js');
+константа { dequeue, playNextSong, playSong } = Требоват('./играть');
+константа { queue } = Требоват('./играть');
 
-module.exports = {
-  name: 'skip',
-  description: 'Skip the current song',
-  async execute(message, args) {
-    const voiceChannel = message.member.voice.channel;
-    if (!voiceChannel) {
-      const embed = new EmbedBuilder()
-        .setColor('#FF0000')
-        .setDescription('🐼 You need to be in a voice channel to use this command!');
-      return message.reply({ embeds: [embed] });
+модуль.экспорт = {
+  Имя: 'пропускать',
+  Описание: 'Пропустить текущую песню',
+  асинхронный execute(сообщение, аргументы) {
+    константа voiceChannel = сообщение.член.Голос.Канал;
+    ЕСЛИ (!голосовой канал) {
+      константа embed = новый EmbedBuilder()
+        .setColor('#фф0000')
+        .setDescription('🐼 Чтобы использовать эту команду, вам необходимо находиться в голосовом канале.!');
+      возвращаться сообщение.Отвечать({ встраивает: [вставлять] });
     }
 
-    const connection = joinVoiceChannel({
-      channelId: voiceChannel.id,
-      guildId: message.guild.id,
-      adapterCreator: message.guild.voiceAdapterCreator,
+    константа connection = присоединиться к голосовому каналу({
+      идентификатор канал: голосовой канал.идентификатор,
+      идентификатор гильдии: сообщение.гильдия.идентификатор,
+      АдаптерСоздатель: сообщение.гильдия.голосовой АдаптерСоздатель,
     });
 
-    if (connection.state.status === VoiceConnectionStatus.Ready) {
-      if (queue.length > 0) {
-        const nextSong = dequeue();
-        await playSong(connection, nextSong.searchQuery, nextSong.message);
+    ЕСЛИ (связь.состояние.Положение дела === Статус голосового решения.Готовый) {
+      ЕСЛИ (очередь.длина > 0) {
+        константа nextSong = снимать с очередь();
+        Ждите Играть песня(соединение, следующая песня.поисковый запрос, Следующая песня.сообщение);
 
-        const embed = new EmbedBuilder()
+        константа embed = новый EmbedBuilder()
            .setColor('#2b71ec')
      .setAuthor({
-          name: 'Skipped Song!',
-          iconURL: 'https://cdn.discordapp.com/attachments/1175488636033175602/1175488721253052426/right-chevron-.png?ex=656b6a2e&is=6558f52e&hm=7a73aa51cb35f25eba52055c7b4a1b56bbf3a6d150643adc15b52dc533236956&',
-          url: 'https://discord.gg/FUEHs7RCqz'
+          Имя: 'Пропущенная песня!',
+          значокURL: 'https://cdn.discordapp.com/attachments/1175488636033175602/1175488721253052426/right-chevron-.png?ex=656b6a2e&amp;is=6558f52e&amp;hm=7a73aa51cb35f25eba52055c7b4a1b56bb f3a6d150643adc15b52dc533236956&',
+          URL: 'https://discord.gg/FUEHs7RCqz'
         })
-          .setDescription('**Let\'s move on to the next beat...**');
-        return message.reply({ embeds: [embed] });
-      } else {
-        const embed = new EmbedBuilder()
+          .setDescription('**позволять\'переходим к следующему такту...**');
+        возвращаться сообщение.Отвечать({ встраивает: [вставлять] });
+      } еще {
+        константа embed = новый EmbedBuilder()
           .setColor('#FFFF00')
           .setDescription('**❌ No songs in the queue to skip.**');
         return message.reply({ embeds: [embed] });
